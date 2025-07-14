@@ -2,6 +2,13 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { products } from "@/data/product";
 
+// ✅ Fix added below
+export function generateStaticParams() {
+  return products.map((product) => ({
+    params: { id: product.id },
+  }));
+}
+
 export default function ProductPage({ params }: { params: { id: string } }) {
   const product = products.find((p) => p.id === params.id);
   if (!product) return notFound();
