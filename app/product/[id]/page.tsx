@@ -1,12 +1,17 @@
+
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { products } from "@/data/product";
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
+export default async function ProductPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const product = products.find((p) => p.id === params.id);
 
   if (!product) {
-    notFound(); // 👈 404 if not found
+    notFound(); // 404 if not found
   }
 
   return (
