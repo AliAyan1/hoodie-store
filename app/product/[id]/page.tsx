@@ -1,24 +1,12 @@
-import Image from "next/image";
-import { notFound } from "next/navigation";
+import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import { products } from "@/data/product";
 
-// ✅ This tells Next.js which product pages to generate
-export function generateStaticParams() {
-  return products.map((product) => ({
-    params: { id: product.id }, // 👈 This fixes your build error
-  }));
-}
-
-// ✅ Page component
-export default function ProductPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function ProductPage({ params }: { params: { id: string } }) {
   const product = products.find((p) => p.id === params.id);
 
   if (!product) {
-    notFound(); // 👈 Returns 404 if product not found
+    notFound(); // 👈 404 if not found
   }
 
   return (
